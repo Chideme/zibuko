@@ -1,0 +1,118 @@
+{% extends "hr/layout.html"%}
+
+{% block title %}
+    Apply Leave
+{% endblock %}
+{% block main %}
+
+<h3 class="mt-4">Awaiting Approvals</h3>
+
+<table class="display" id="export">
+    <thead>
+        <th>Date</th>
+        <th>Employee</th>
+        <th>Application type</th>
+        <th>Status</th>
+        <th>View</th>      
+    </thead>
+    <tbody>
+        {% for i in leave_applications %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Leave Application</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:leave_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+            <!--td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Action{{ i.id }}">
+                    <span data-feather="plus-circle"></span>
+                    Action
+                </button>
+            </td-->
+        </tr>
+        {% endfor %}
+        {% for i in mileage_claims %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Mileage Claim</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:mileage_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% for i in salary_advances %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Salary Advance</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:salary_advance_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% for i in expense_claims %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Expense Claim</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:expense_claim_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!--ActionJournal 
+{% for i in applications %}
+<div class="modal fade" id="Action{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="Action{{ i.id }}FormModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Action{{ i.id }}FormLabel">Action</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="g-3"  action="{% url 'hr:approve_leave' %}" method="post" >
+                    {% csrf_token %}
+                    <div class="mb-3" >
+                        <input type="hidden" value="{{ i.id }}" name="id" autocomplete="off"  autofocus class="form-control" readonly>
+                    </div>
+                    <div class="mb-3" >
+                        <select class="form-select" id="validationDefault04" name="action" required>
+                            <option selected>Open this select menu</option>
+                            <option value="Approved">Approve</option>
+                            <option value="Rejected">Reject</option>
+            
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit"><span data-feather="check-circle"></span> Submit response</button>
+                 </form>
+            </div>
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+            
+    </div>
+</div>
+
+{% endfor %}
+Action Modal-->
+
+
+{% endblock %}

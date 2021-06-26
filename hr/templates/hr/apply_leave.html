@@ -1,0 +1,29 @@
+{% extends "hr/layout.html"%}
+{% load crispy_forms_tags %}
+{% block title %}
+    Apply Leave
+{% endblock %}
+{% block main %}
+
+<h3 class="mt-4">Apply for leave</h3>
+
+<form class="row g-3"action="{% url 'hr:apply_leave' %}" method="post">
+    {% csrf_token %}
+    <div class="col-md-4">
+     {{ form.start_date | as_crispy_field }}
+    </div>
+    <div class="col-md-4">
+      {{ form.return_date |as_crispy_field }}
+    </div>
+    
+    
+    <div class="col-md-3">
+      {{ form.leave_type | as_crispy_field }}
+    </div>
+    
+    
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit"><span data-feather="check-square"></span> Submit form</button>
+    </div>
+  </form>
+{% endblock %}

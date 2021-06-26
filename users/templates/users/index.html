@@ -1,0 +1,14 @@
+{% extends "users/layout.html"%}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+  <h1>Welcome</h1>
+  
+  
+    <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg" role="button" >Login</a>
+  
+</div>
+{% endblock %}  

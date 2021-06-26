@@ -1,0 +1,67 @@
+{% extends "hr/layout.html"%}
+
+{% block title %}
+    Approve Leave
+{% endblock %}
+{% block main %}
+
+<h3 class="mt-4">Apply for leave</h3>
+<div class="card">
+    <div class ="card-body">
+        <form class="row g-3">
+            <div class="col-md-6">
+              <label for="inputName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="inputName" value="{{ application.employee.first_name }}" disabled>
+            </div>
+            <div class="col-md-6">
+              <label for="LastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="LastName" value="{{ application.employee.last_name }}" disabled>
+            </div>
+            <div class="col-6">
+              <label for="inputStart" class="form-label">Start date</label>
+              <input type="text" class="form-control" id="inputStart" value="{{ application.start_date }}" disabled>
+            </div>
+            <div class="col-6">
+              <label for="inputEnd" class="form-label">Return to work date</label>
+              <input type="text" class="form-control" id="inputEnd" value="{{ application.return_date }}" disabled>
+            </div>
+            <div class="col-md-5">
+                <label for="inputType" class="form-label">Type</label>
+                <input type="text" class="form-control" id="inputType" value="{{ application.leave_type }}" disabled>
+            </div>
+            <div class="col-md-5">
+              <label for="inputStatus" class="form-label">Status</label>
+              <input type="text" class="form-control" id="inputStatus" value="Pending approval" disabled>
+            </div>
+           
+            <div class="col-md-2">
+              <label for="inputDays" class="form-label">Number of days</label>
+              <input type="text" class="form-control" id="inputDays" value="{{ application.days }}" disabled>
+            </div>
+            
+          </form>
+    </div>
+    <div class="card-footer">
+        <form action="{% url  'hr:leave_approval' id=application.id %}" method="post" onsubmit="mySubmit()">
+            {% csrf_token %}
+            <input type="text" class="form-control"name="id" value="{{ application.id }}" hidden>
+            <input type="text" id="action" class="form-control"name="action" hidden>
+            <div class="btn-group" role="group" aria-label="Button Group">
+                <button type="submit"  name="rejected" onclick="myFunction(this)" class="btn btn-outline-danger"><span data-feather="trash"></span> Reject</button>
+                <button type="submit"  name="accepted" class="btn btn-outline-primary"><span data-feather="check-circle"></span> Approve</button>
+                
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+{% endblock %}
+<script>
+    function mySubmit() {
+       function myFunction(this){
+        document.getElementById("action").value = this.name; 
+      };
+      return true;
+    }
+</script>

@@ -1,0 +1,27 @@
+{% extends "hr/layout.html"%}
+
+{% block title %}
+    Home
+{% endblock %}
+{% block main %}
+<h1 class="mt-4">Dashboard</h1>
+<div class="row p-3">
+    <div class="card col" style="background: #444;">
+      <div class="card-title h6" style="color:white;">Lunch Orders</div>
+      <div class="text-center">
+        <div class="h5"  style="color: greenyellow;">$800.00</div>
+        <p class="card-text" style="color: #aaf1a8;">Number of Plates Ordered: 8 </p>
+      </div>
+    </div>
+    <div class="card col  offset-1" style="background: #444;">
+      <div class="card-title h6" style="color:white;">Leave Days</div>
+      <div class="text-center">
+        <div class="h5" style="color: greenyellow;" >Leave days balance: 5</div>
+        <p class="card-text sm" style="color: #aaf1a8;">Leave days taken to date: 6</p>
+      </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}  
