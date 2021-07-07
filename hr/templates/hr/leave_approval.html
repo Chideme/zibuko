@@ -1,11 +1,10 @@
 {% extends "hr/layout.html"%}
-
 {% block title %}
     Approve Leave
 {% endblock %}
 {% block main %}
 
-<h3 class="mt-4">Apply for leave</h3>
+<h3 class="mt-4">Leave Application</h3>
 <div class="card">
     <div class ="card-body">
         <form class="row g-3">
@@ -31,7 +30,7 @@
             </div>
             <div class="col-md-5">
               <label for="inputStatus" class="form-label">Status</label>
-              <input type="text" class="form-control" id="inputStatus" value="Pending approval" disabled>
+              <input type="text" class="form-control" id="inputStatus" value="{{ application.status }}" disabled>
             </div>
            
             <div class="col-md-2">
@@ -41,27 +40,29 @@
             
           </form>
     </div>
+    {% if perms.users.can_approve_hr %}
     <div class="card-footer">
-        <form action="{% url  'hr:leave_approval' id=application.id %}" method="post" onsubmit="mySubmit()">
+        <form id="hk1" action="{% url  'hr:leave_approval' id=application.id %}" method="post">
             {% csrf_token %}
             <input type="text" class="form-control"name="id" value="{{ application.id }}" hidden>
-            <input type="text" id="action" class="form-control"name="action" hidden>
+            <input type="text" value="" id="action" class="form-control"name="action" hidden>
             <div class="btn-group" role="group" aria-label="Button Group">
-                <button type="submit"  name="rejected" onclick="myFunction(this)" class="btn btn-outline-danger"><span data-feather="trash"></span> Reject</button>
-                <button type="submit"  name="accepted" class="btn btn-outline-primary"><span data-feather="check-circle"></span> Approve</button>
+                <button   value="Rejected" onclick="myFunction(this)" class="btn btn-outline-danger"><span data-feather="trash"></span> Reject</button>
+                <button   value="Approved" onclick="myFunction(this)"  class="btn btn-outline-primary"><span data-feather="check-circle"></span> Approve</button>
                 
             </div>
         </form>
-        
+      {% endif %}
     </div>
 </div>
 
-{% endblock %}
 <script>
-    function mySubmit() {
-       function myFunction(this){
-        document.getElementById("action").value = this.name; 
+    
+       function myFunction(o){
+        document.getElementById("action").value = o.value; 
+        document.getElementById('hk1').submit();
+      
       };
-      return true;
-    }
+    
 </script>
+{% endblock %}

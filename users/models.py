@@ -8,7 +8,7 @@ class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name="staff")
     staff_number = models.CharField(max_length=100,null=True)
     national_id = models.CharField(max_length=100,null=False)
-    department = models.CharField(max_length=100,null=False)
+    department = models.CharField(max_length=100,null=False,default="Zibuko")
     position = models.CharField(max_length=100,null=False)
     start_date = models.DateField(null=False)
     leave_days_accrual_rate = models.DecimalField(max_digits=5,decimal_places=2,null=False)

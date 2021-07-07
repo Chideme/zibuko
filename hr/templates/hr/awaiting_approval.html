@@ -55,7 +55,7 @@
             <td>Salary Advance</td>
             <td>{{ i.status }}</td>
             <td>
-                <a href="{% url  'hr:salary_advance_approval' id=i.id %}">
+                <a href="{% url  'hr:advance_approval' id=i.id %}">
                     <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
                 </a>
             </td>
@@ -68,7 +68,7 @@
             <td>Expense Claim</td>
             <td>{{ i.status }}</td>
             <td>
-                <a href="{% url  'hr:expense_claim_approval' id=i.id %}">
+                <a href="{% url  'hr:expense_approval' id=i.id %}">
                     <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
                 </a>
             </td>

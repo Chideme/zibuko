@@ -1,0 +1,34 @@
+{% extends "hr/layout.html"%}
+{% load crispy_forms_tags %}
+{% block title %}
+    Apply Expense Claim
+{% endblock %}
+{% block main %}
+
+<h3 class="mt-4">Apply for expense claim</h3>
+<form class="row g-3"action="{% url 'hr:apply_expense_claim' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      {{ form.non_field_errors  }}
+    {% endif %}
+    <div class="col-md-8">
+     {{ form.date | as_crispy_field }}
+    </div>
+    <div class="col-md-6">
+      {{ form.expense |as_crispy_field }}
+    </div>
+    <div class="col-md-6">
+        {{ form.amount |as_crispy_field }}
+    </div>
+    <div class="col-md-8">
+        {{ form.receipt |as_crispy_field }}
+        
+    </div>
+
+    
+    
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit"><span data-feather="check-square"></span> Submit form</button>
+    </div>
+  </form>
+{% endblock %}

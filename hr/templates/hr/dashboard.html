@@ -6,11 +6,11 @@
 {% block main %}
 <h1 class="mt-4">Dashboard</h1>
 <div class="row p-3">
-    <div class="card col" style="background: #444;">
-      <div class="card-title h6" style="color:white;">Lunch Orders</div>
+    <div class="card col" style="background: greenyellow;">
+      <div class="card-title h6"  style="color:black;">Lunch Orders</div>
       <div class="text-center">
-        <div class="h5"  style="color: greenyellow;">$800.00</div>
-        <p class="card-text" style="color: #aaf1a8;">Number of Plates Ordered: 8 </p>
+        <div class="h5"  style="color: black;">$800.00</div>
+        <p class="card-text" style="color: black;">Number of Plates Ordered: 8 </p>
       </div>
     </div>
     <div class="card col  offset-1" style="background: #444;">
@@ -22,6 +22,70 @@
     </div>
     
 </div>
+<h3 class="mt-4">Applications</h3>
 
+<table class="display" id="export">
+    <thead>
+        <th>Date</th>
+        <th>Employee</th>
+        <th>Application type</th>
+        <th>Status</th>
+        <th>View</th>      
+    </thead>
+    <tbody>
+        {% for i in leave_applications %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Leave Application</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:leave_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% for i in mileage_claims %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Mileage Claim</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:mileage_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% for i in salary_advances %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Salary Advance</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:advance_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% for i in expense_claims %}
+        <tr>
+            <td>{{ i.date }}</td>
+            <td>{{ i.employee }}</td>
+            <td>Expense Claim</td>
+            <td>{{ i.status }}</td>
+            <td>
+                <a href="{% url  'hr:expense_approval' id=i.id %}">
+                    <button type="button" class="btn btn-primary"><span data-feather="eye"></span> View</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}  

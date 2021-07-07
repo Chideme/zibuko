@@ -1,27 +1,21 @@
 {% extends "hr/layout.html"%}
 {% load crispy_forms_tags %}
 {% block title %}
-    Apply Leave
+    Apply Salary Advance
 {% endblock %}
 {% block main %}
 
-<h3 class="mt-4">Apply for leave</h3>
-
-<form class="row g-3"action="{% url 'hr:apply_leave' %}" method="post">
+<h3 class="mt-4">Apply Salary Advance</h3>
+<form class="row g-3"action="{% url 'hr:apply_salary_advance' %}" method="post">
     {% csrf_token %}
     {% if form.non_field_errors %}
       {{ form.non_field_errors  }}
     {% endif %}
-    <div class="col-md-4">
-     {{ form.start_date | as_crispy_field }}
+    <div class="col-md-6">
+     {{ form.date | as_crispy_field }}
     </div>
-    <div class="col-md-4">
-      {{ form.return_date |as_crispy_field }}
-    </div>
-    
-    
-    <div class="col-md-3">
-      {{ form.leave_type | as_crispy_field }}
+    <div class="col-md-6">
+      {{ form.amount |as_crispy_field }}
     </div>
     
     

@@ -1,0 +1,40 @@
+{% extends "hr/layout.html"%}
+{% load crispy_forms_tags %}
+{% block title %}
+    Apply Mileage Claim
+{% endblock %}
+{% block main %}
+
+<h3 class="mt-4">Apply for Mileage Claim</h3>
+<form class="row g-3"action="{% url 'hr:apply_mileage_claim' %}" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      {{ form.non_field_errors  }}
+    {% endif %}
+    <div class="col-md-6">
+     {{ form.date | as_crispy_field }}
+    </div>
+    <div class="col-md-3">
+      {{ form.time_in |as_crispy_field }}
+    </div>
+    <div class="col-md-3">
+        {{ form.time_out |as_crispy_field }}
+    </div>
+    <div class="col-md-8">
+        {{ form.employee_vehicle | as_crispy_field }}
+    </div>
+    <div class="col-md-6">
+        {{ form.speedometer_opening_reading | as_crispy_field }}
+    </div>
+    <div class="col-md-6">
+        {{ form.speedometer_closing_reading | as_crispy_field }}
+    </div>
+    <div class="col-md-8">
+        {{ form.details | as_crispy_field }}
+    </div>
+    
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit"><span data-feather="check-square"></span> Submit form</button>
+    </div>
+  </form>
+{% endblock %}

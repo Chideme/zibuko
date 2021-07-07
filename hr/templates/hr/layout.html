@@ -26,17 +26,26 @@
             <div class="border-end bg-light" id="sidebar-wrapper">
                 
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:dashboard' %}">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:apply_leave' %}">Apply for Leave</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Order Lunch</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Apply for salary advance</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Expense Claim</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Vehicle Mileage Claim</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:awaiting_approval' %}">Pending Approvals</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:dashboard' %}"><span  data-feather="home"></span> Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:apply_leave' %}"><span  data-feather="calendar"></span> Apply for Leave</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:order_lunch' %}"><span  data-feather="shopping-cart"></span> Order Lunch</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:apply_salary_advance' %}"><span  data-feather="dollar-sign"></span> Apply for salary advance</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:apply_expense_claim' %}"><span  data-feather="credit-card"></span> Expense Claim</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:apply_mileage_claim' %}"><span  data-feather="truck"></span> Vehicle Mileage Claim</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url  'hr:awaiting_approval' %}"><span  data-feather="clipboard"></span> Pending Approvals</a>
                 </div>
                 
                 <ul class="nav flex-column">
-                  
+                    <li><span  data-feather="user"></span>Logged in as {{ request.user }}</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url  'users:password_change' %}">
+                          <span  data-feather="edit"></span>
+                          <span>
+                          Change Password
+                          </span>
+                        </a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url  'users:logout' %}">
                           <span style="color:red;" data-feather="log-out"></span>
@@ -75,8 +84,14 @@
                         </div>
                     </div>
                 </nav>
+                
                 <!-- Page content-->
                 <div class="container-fluid">
+                    {% if messages %}
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    {% endif %}
                     
                     {% block main %}{% endblock %}
                 </div>
